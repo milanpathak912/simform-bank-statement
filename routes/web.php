@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','BankTransectionsController@index');
 
 Route::get('/search-statement','BankTransectionsController@index');
 Route::any('/list','BankTransectionsController@list');

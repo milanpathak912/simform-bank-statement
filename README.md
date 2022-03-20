@@ -38,7 +38,7 @@ Opening Balance : Balance till to the selected start date.
 Closing Balance : Balance till to the selected end date.
 bank_account_id : Dummy as we need to show the statement of logged in customer only.
 
-Prectical Done By :
+Practical Done By :
 Milan Pathak
 +91-8000644182
 milanpathak912@gmail.com
