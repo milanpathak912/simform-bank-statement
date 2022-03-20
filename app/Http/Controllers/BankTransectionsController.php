@@ -44,31 +44,18 @@ class BankTransectionsController extends Controller
         }
         $query = $query->orderBy($orderby[$column], $order)->offset($start)->limit($length)->get();
         $data = [];
-        $balance = 0;
         $getOpening = 0;
-        if($query->first()){
-            $getOpeningStartDate = $query->first()->created_at;
-            $getOpeningStartDate = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$getOpeningStartDate)->subDay();
-            $getOpeningBalance = BankTransection::getOpeningBalance($bankAccountId,$getOpeningStartDate,$request->endDate);
-            if(isset($getOpeningBalance) && isset($getOpeningBalance['OpeningBalance'])){
-                $getOpening = (float)$getOpeningBalance['OpeningBalance'];
-                $balance = (float)$getOpeningBalance['OpeningBalance'];
-               
-            }
-        }
         foreach ($query as $key => $value)
         {
             $credit = 0;
             $debit = 0;
+            $balance = $value->available_balance;
+            
             if($value->status == 'c'){
                 $credit = $value->amount;
-                $balance = $balance + $credit; 
             }else{
                 $debit = $value->amount;
-                $balance = $balance - $debit; 
             }
-            // $balance = $balance + ($credit - $debit);   
-            // $data[] = [getFormatedDate($value->created_at), $value->description, $credit, $debit , $balance];
             $data[] = [getFormatedDate($value->created_at), $value->description, getFormatedAmount(floatval($credit),2),getFormatedAmount(floatval($debit),2) , getFormatedAmount(floatval($balance),2),$getOpening];
         }
         $json_data = array(

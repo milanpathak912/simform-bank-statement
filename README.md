@@ -6,16 +6,34 @@ c. There will be closing balance at end of all transactions
 d. You have to provide option to select date range between which you wants  transactions 
 2. Provide seeders for transactions table where you can simulate following
 
-Please follow the given below step to run the project
+=======================================================
+Please follow the given below step to run the project  |
+=======================================================
+Prerequisite for run the program :
+
+- PHP >= 7.2.5
+- BCMath PHP Extension
+- Ctype PHP Extension
+- Fileinfo PHP extension
+- JSON PHP Extension
+- Mbstring PHP Extension
+- OpenSSL PHP Extension
+- PDO PHP Extension
+- Tokenizer PHP Extension
+- XML PHP Extension
+
 STEP 1 : composer install OR composer update
 STEP 2 : create new database and setup it into .env file
 STEP 3 : run following command in your terminal to run migrations 
           => php artisan migrate
 STEP 4 : run following command to genrate dummy data using seeder 
           => php artisan db:seed --class=BankTransectionsSeeder
-STEP 5 : run project directly using localhost  
+STEP 5 : run project directly using localhost
 
-About Project(Developer Note)
+===============================
+About Project(Developer Note) |
+===============================
+
 Opening Balance : Balance till to the selected start date. 
 Closing Balance : Balance till to the selected end date.
 bank_account_id : Dummy as we need to show the statement of logged in customer only.

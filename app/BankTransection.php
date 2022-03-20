@@ -10,10 +10,54 @@ use DateInterval;
 class BankTransection extends Model
 {
     protected $fillable = [
-        'bank_account_id', 'description', 'amount','status'
+        'bank_account_id', 'description', 'amount', 'available_balance', 'status'
     ];
-    
+    protected $casts = [
+        'amount' => 'float',
+        'available_balance' => 'float',
+    ];
     public static function getOpeningBalance($bankAccountId,$startDate,$endDate)
+    {
+        $startDate = new DateTime($startDate);
+        $startDate->sub(new DateInterval('P1D'))->format('Y-m-d');
+        
+        $endDate = new DateTime($endDate);
+        $endDate->add(new DateInterval('P1D'));
+        
+        $getOpeningBalance = BankTransection::where('bank_account_id',$bankAccountId)
+        ->whereBetween('created_at',[$startDate,$endDate])
+        ->orderBy('created_at','ASC')
+        ->first();
+        
+        
+        $openingBalance = 0.00;
+        
+        //Get Opening Balance
+        if($getOpeningBalance){
+            $openingBalance = $getOpeningBalance->available_balance;
+        }
+
+        //Get Closing Balance
+        $getClosingBalance = BankTransection::where('bank_account_id',$bankAccountId)
+        ->whereBetween('created_at',[$startDate,$endDate])
+        ->orderBy('created_at','DESC')
+        ->first();
+
+        $closingBalance = 0.00;
+        if($getClosingBalance){
+            $closingBalance = $getClosingBalance->available_balance;
+        }    
+        $return_data = [
+            'OpeningBalance' => (float)$openingBalance,
+            'ClosingBalance' => (float)$closingBalance,
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+            'mainOpening' => $getOpeningBalance,
+            'mainClosing' => $getClosingBalance,
+        ];        
+        return $return_data;
+    }
+    /*public static function getOpeningBalance($bankAccountId,$startDate,$endDate)
     {
         $endDate = new DateTime($endDate);
         $endDate->add(new DateInterval('P1D'));
@@ -62,15 +106,17 @@ class BankTransection extends Model
             $closingBalance = ($getClosingBalance_C - $getClosingBalance_D);
         }    
         $return_data = [
-            'OpeningCredit' => getFormatedAmount(floatval($getOpeningBalance_C),2),
-            'OpeningDebit' => getFormatedAmount(floatval($getOpeningBalance_D),2),
-            'OpeningBalance' => getFormatedAmount(floatval($openingBalance),2),
-            'ClosingCredit' => getFormatedAmount(floatval($getClosingBalance_C),2),
-            'ClosingDebit' => getFormatedAmount(floatval($getClosingBalance_D),2),
-            'ClosingBalance' => getFormatedAmount(floatval($closingBalance),2)
+            'OpeningCredit' => (float)$getOpeningBalance_C,
+            'OpeningDebit' => (float)$getOpeningBalance_D,
+            'OpeningBalance' => (float)$openingBalance,
+            'ClosingCredit' => (float)$getClosingBalance_C,
+            'ClosingDebit' => (float)$getClosingBalance_D,
+            'ClosingBalance' => (float)$closingBalance,
+            // 'mainOpening' => $getOpeningBalance,
+            // 'mainClosing' => $getClosingBalance,
         ];        
         return $return_data;
-    }
+    }*/
     
 }
 

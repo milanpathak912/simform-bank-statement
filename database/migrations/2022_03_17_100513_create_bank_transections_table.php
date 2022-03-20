@@ -18,6 +18,7 @@ class CreateBankTransectionsTable extends Migration
             $table->integer('bank_account_id');
             $table->text('description');
             $table->double('amount',10,2);
+            $table->double('available_balance',10,2)->default(0.00);
             $table->enum('status',['c','d']);
             $table->timestamps();
             $table->softDeletes();

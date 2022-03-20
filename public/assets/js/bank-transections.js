@@ -70,10 +70,10 @@ function DatatableInitiate(startDate='',endDate='') {
       success: function(response) {
         // console.log(response);
         if(response["OpeningBalance"] !== ""){
-          $('#openingDiv').html("<b>Opening Balance</b> on "+moment(_fromDate).format('DD-MM-YYYY')+" : <b>"+response['OpeningBalance']+"</b>");
+          $('#openingDiv').html("<b>Opening Balance</b> on "+moment(_fromDate).format('DD-MM-YYYY')+" : <b>"+response['OpeningBalance'].toFixed(2)+"</b>");
         }
         if(response['ClosingBalance'] !== ""){
-          $('#closingDiv').html("<b>Closing Balance</b> on "+moment(_toDate).format('DD-MM-YYYY')+" : <b>"+response['ClosingBalance']+"</b>");
+          $('#closingDiv').html("<b>Closing Balance</b> on "+moment(_toDate).format('DD-MM-YYYY')+" : <b>"+response['ClosingBalance'].toFixed(2)+"</b>");
         }
       },
       error: function (errorResponse) { 
