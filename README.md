@@ -21,16 +21,6 @@ Prerequisite for run the program :
 - Tokenizer PHP Extension
 - XML PHP Extension
 
-STEP 1 : (clone the repo)
-STEP 2 : composer install OR composer update
-STEP 3 : create new database and setup it into .env file
-STEP 4 : run following command in your terminal to run migrations 
-          => php artisan migrate
-STEP 5 : run following command to genrate dummy data using seeder 
-          => php artisan db:seed --class=BankTransectionsSeeder
-STEP 6 : run project directly using localhost
-Steps 
-
 =========================
 
 - STEP 1 : composer install OR composer update
