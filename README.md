@@ -22,13 +22,14 @@ Prerequisite for run the program :
 - Tokenizer PHP Extension
 - XML PHP Extension
 
-STEP 1 : composer install OR composer update
-STEP 2 : create new database and setup it into .env file
-STEP 3 : run following command in your terminal to run migrations 
+STEP 1 : (clone the repo)
+STEP 2 : composer install OR composer update
+STEP 3 : create new database and setup it into .env file
+STEP 4 : run following command in your terminal to run migrations 
           => php artisan migrate
-STEP 4 : run following command to genrate dummy data using seeder 
+STEP 5 : run following command to genrate dummy data using seeder 
           => php artisan db:seed --class=BankTransectionsSeeder
-STEP 5 : run project directly using localhost
+STEP 6 : run project directly using localhost
 
 ===============================
 About Project(Developer Note) |
@@ -37,6 +38,7 @@ About Project(Developer Note) |
 Opening Balance : Balance till to the selected start date. 
 Closing Balance : Balance till to the selected end date.
 bank_account_id : Dummy as we need to show the statement of logged in customer only.
+Add Database file for your reference (path : public/bank.sql) 
 
 Practical Done By :
 Milan Pathak
