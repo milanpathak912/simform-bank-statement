@@ -30,6 +30,7 @@ STEP 5 : run following command to genrate dummy data using seeder
           => php artisan db:seed --class=BankTransectionsSeeder
 STEP 6 : run project directly using localhost
 Steps 
+
 =========================
 
 - STEP 1 : composer install OR composer update
